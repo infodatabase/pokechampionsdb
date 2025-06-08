@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1011,
+    "name": "pokemon1011",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1011.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1011.png",
+    "description": "Descripción del Pokémon número 1011.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1012,
+    "name": "pokemon1012",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1012.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1012.png",
+    "description": "Descripción del Pokémon número 1012.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1013,
+    "name": "pokemon1013",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1013.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1013.png",
+    "description": "Descripción del Pokémon número 1013.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1014,
+    "name": "pokemon1014",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1014.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1014.png",
+    "description": "Descripción del Pokémon número 1014.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1015,
+    "name": "pokemon1015",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1015.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1015.png",
+    "description": "Descripción del Pokémon número 1015.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1016,
+    "name": "pokemon1016",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1016.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1016.png",
+    "description": "Descripción del Pokémon número 1016.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1017,
+    "name": "pokemon1017",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1017.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1017.png",
+    "description": "Descripción del Pokémon número 1017.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1018,
+    "name": "pokemon1018",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1018.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1018.png",
+    "description": "Descripción del Pokémon número 1018.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1019,
+    "name": "pokemon1019",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1019.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1019.png",
+    "description": "Descripción del Pokémon número 1019.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1020,
+    "name": "pokemon1020",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1020.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1020.png",
+    "description": "Descripción del Pokémon número 1020.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1021,
+    "name": "pokemon1021",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1021.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1021.png",
+    "description": "Descripción del Pokémon número 1021.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1022,
+    "name": "pokemon1022",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1022.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1022.png",
+    "description": "Descripción del Pokémon número 1022.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1023,
+    "name": "pokemon1023",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1023.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1023.png",
+    "description": "Descripción del Pokémon número 1023.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1024,
+    "name": "pokemon1024",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1024.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1024.png",
+    "description": "Descripción del Pokémon número 1024.",
+    "region": "Paldea",
+    "variations": []
+  },
+  {
+    "id": 1025,
+    "name": "pokemon1025",
+    "types": [
+      "normal"
+    ],
+    "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1025.png",
+    "shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1025.png",
+    "description": "Descripción del Pokémon número 1025.",
+    "region": "Paldea",
+    "variations": []
+  }
+]

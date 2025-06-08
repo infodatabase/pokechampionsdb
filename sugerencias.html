@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sugerencias - PokeChampions.DB</title>
+  <link rel="icon" href="img/icon.png" type="image/png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .feedback-horizontal {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+      background: linear-gradient(to right, #1e1e1e, #2a2a2a);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .feedback-text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .feedback-text h2 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #ffcc00;
+    }
+
+    .feedback-text p {
+      font-size: 1.1em;
+      color: #cccccc;
+    }
+
+    .feedback-form {
+      flex: 2;
+      min-width: 400px;
+    }
+
+    .feedback-form iframe {
+      width: 100%;
+      height: 450px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffffff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1a1a1a;
+      color: #888;
+      font-size: 0.9em;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section id="sugerencias" class="feedback-horizontal">
+      <div class="feedback-text">
+        <h2>¿Tienes alguna sugerencia?</h2>
+        <p>Ayúdanos a mejorar la experiencia de PokeChampions.DB con tu opinión.</p>
+      </div>
+      <div class="feedback-form">
+        <iframe 
+          src="https://docs.google.com/forms/d/e/1FAIpQLSfZe6IoQRc2Zjq_tuhU1bCbmmUQZcpT89t648OBqQmtGEXO9w/viewform?embedded=true" 
+          frameborder="0" marginheight="0" marginwidth="0">
+          Cargando…
+        </iframe>
+      </div>
+    </section>
+    <button class="back-button" onclick="window.location.href='index.html'">← Volver al Inicio</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 PokeChampions.DB</p>
+  </footer>
+</body>
+</html>

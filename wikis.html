@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pokémon Confirmados - PokeChampions.DB</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      background-color: #111;
+      color: #f2f2f2;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffcc00;
+      margin-bottom: 2rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .pokemon-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      background-color: #1e1e1e;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+      transition: transform 0.2s;
+    }
+
+    .pokemon-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .icon {
+      width: 100px;
+      height: 100px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      border-radius: 50%;
+      background-color: #222;
+      flex-shrink: 0;
+    }
+
+    .name {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #f2f2f2;
+    }
+
+    .note {
+      text-align: center;
+      font-style: italic;
+      color: #aaa;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .back-button {
+      display: block;
+      margin: 2rem auto 0;
+      padding: 0.7rem 1.5rem;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📚 Pokémon Confirmados</h1>
+
+  <div class="grid">
+    <div class="pokemon-item">
+      <div class="icon" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png');"></div>
+      <div class="name">Charizard / Mega Charizard X</div>
+    </div>
+    <div class="pokemon-item">
+      <div class="icon" style="background-image: url('https://img.game8.co/3487538/1df75de33bd6bde749f25c9e2433bca6.png/show');"></div>
+      <div class="name">Hisuian Samurott</div>
+    </div>
+    <div class="pokemon-item">
+      <div class="icon" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/340.png');"></div>
+      <div class="name">Whiscash</div>
+    </div>
+    <div class="pokemon-item">
+      <div class="icon" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/282.png');"></div>
+      <div class="name">Gardevoir</div>
+    </div>
+    <div class="pokemon-item">
+      <div class="icon" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png');"></div>
+      <div class="name">Pikachu</div>
+    </div>
+    <div class="pokemon-item">
+      <div class="icon" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png');"></div>
+      <div class="name">Lucario</div>
+    </div>
+    <div class="pokemon-item">
+      <div class="icon" style="background-image: url('https://img.game8.co/4119710/d5019e101a36a2518f918e9f1e33f0c1.png/show');"></div>
+      <div class="name"> Aegislash<br> (Forma Escudo)</div>
+    </div>
+  </div>
+
+  <p class="note">
+    Varios Pokémon fueron mostrados en el tráiler oficial de presentación, así como en el sitio web del juego.<br> La tabla de arriba muestra una lista de todos los Pokémon confirmados que se han visto en el material promocional.
+
+  </p>
+  <button class="back-button" onclick="window.location.href='index.html'">← Volver al Inicio</button>
+
+</body>
+</html>

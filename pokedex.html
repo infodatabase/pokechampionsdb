@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PokeChampions.DB - Pokédex</title>
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  body 
+  {
+    background-color: #121212;
+    color: #eee;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 20px;
+  }
+  #filters {
+    margin-bottom: 15px;
+  }
+  #generationFilters button,
+  #typeFilters button {
+    cursor: pointer;
+    border: none;
+    padding: 6px 12px;
+    margin: 3px 6px 6px 0;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+  }
+  #pokemonContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
+    gap: 12px;
+  }
+  .pokemon-card {
+    background: linear-gradient(135deg, #222, #333);
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px #000 inset;
+    user-select: none;
+    transition: transform 0.2s ease;
+  }
+  .pokemon-card:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+  .pokemon-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 6px;
+  }
+  .types span {
+    display: inline-block;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 0.8em;
+    margin-right: 4px;
+  }
+  #pagination {
+    margin-top: 20px;
+    text-align: center;
+  }
+  #pagination button {
+    cursor: pointer;
+    padding: 6px 14px;
+    margin: 0 10px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    background-color: #444;
+    color: #eee;
+    transition: background-color 0.3s ease;
+  }
+  #pagination button:disabled {
+    background-color: #222;
+    cursor: not-allowed;
+  }
+  #pageIndicator {
+    font-weight: bold;
+  }
+
+  /* Modal styles */
+  #modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  #modal {
+    background: #222;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    padding: 20px;
+    color: #eee;
+    position: relative;
+    box-shadow: 0 0 20px #000 inset;
+  }
+  #modal h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  #modal .types span {
+    margin: 0 6px 8px 0;
+  }
+  #modal img {
+    display: block;
+    margin: 0 auto 10px auto;
+    max-width: 150px;
+    max-height: 150px;
+  }
+  #modal p {
+    font-size: 0.9em;
+    line-height: 1.3em;
+    text-align: justify;
+    margin-bottom: 15px;
+  }
+  #modal button.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: #900;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+  }
+  #modal a.more-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #66ccff;
+    text-decoration: none;
+  }
+  #modal a.more-link:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<button onclick="window.location.href='index.html'" class="back-button">← Volver al Inicio</button>
+
+<body>
+
+<h1>PokeChampions.DB - Pokédex</h1>
+
+<div id="filters">
+  <div id="generationFilters"><strong>Generación:</strong> </div>
+  <div id="typeFilters"><strong>Tipo:</strong> </div>
+  <div style="margin-top:10px;">
+    <input type="text" id="searchInput" placeholder="Buscar por nombre o ID" style="padding:6px; width:200px;" />
+    <button id="searchBtn">Buscar</button>
+    <button id="resetFiltersBtn">Resetear filtros</button>
+  </div>
+</div>
+
+<div id="pokemonContainer"></div>
+
+<div id="pagination">
+  <button id="prevBtn" disabled>Anterior</button>
+  <span id="pageIndicator">Página 1</span>
+  <button id="nextBtn" disabled>Siguiente</button>
+</div>
+
+<!-- Modal -->
+<div id="modalOverlay">
+  <div id="modal">
+    <button class="close-btn" title="Cerrar">&times;</button>
+    <h2 id="modalName"></h2>
+    <div class="types" id="modalTypes"></div>
+    <img id="modalImage" alt="Pokémon" />
+    <img id="modalImageShiny" alt="Pokémon shiny" style="margin-top: 8px;" />
+    <p id="modalDescription">Cargando descripción...</p>
+    <a href="#" target="_blank" id="modalMoreLink" class="more-link">Ver más detalles</a>
+  </div>
+</div>
+
+<script>
+const typeColors = {
+  normal: '#A8A77A',
+  fighting: '#C22E28',
+  flying: '#A98FF3',
+  poison: '#A33EA1',
+  ground: '#E2BF65',
+  rock: '#B6A136',
+  bug: '#A6B91A',
+  ghost: '#735797',
+  steel: '#B7B7CE',
+  fire: '#EE8130',
+  water: '#6390F0',
+  grass: '#7AC74C',
+  electric: '#F7D02C',
+  psychic: '#F95587',
+  ice: '#96D9D6',
+  dragon: '#6F35FC',
+  dark: '#705746',
+  fairy: '#D685AD',
+};
+
+const generations = {
+  1: { start: 1, end: 151 },
+  2: { start: 152, end: 251 },
+  3: { start: 252, end: 386 },
+  4: { start: 387, end: 493 },
+  5: { start: 494, end: 649 },
+  6: { start: 650, end: 721 },
+  7: { start: 722, end: 809 },
+  8: { start: 810, end: 898 },
+  9: { start: 899, end: 1025 },
+};
+
+const itemsPerPage = 35;
+
+const generationFiltersDiv = document.getElementById('generationFilters');
+const typeFiltersDiv = document.getElementById('typeFilters');
+const pokemonContainer = document.getElementById('pokemonContainer');
+const searchInput = document.getElementById('searchInput');
+const searchBtn = document.getElementById('searchBtn');
+const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+const pageIndicator = document.getElementById('pageIndicator');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+const modalOverlay = document.getElementById('modalOverlay');
+const modalName = document.getElementById('modalName');
+const modalTypes = document.getElementById('modalTypes');
+const modalImage = document.getElementById('modalImage');
+const modalImageShiny = document.getElementById('modalImageShiny');
+const modalDescription = document.getElementById('modalDescription');
+const modalMoreLink = document.getElementById('modalMoreLink');
+const modalCloseBtn = document.querySelector('#modal .close-btn');
+
+let allPokemons = [];
+let filteredPokemons = [];
+let currentPage = 1;
+const selectedTypes = new Set();
+const selectedGenerations = new Set();
+
+const typeTranslation = {
+  normal: 'Normal',
+  fighting: 'Lucha',
+  flying: 'Volador',
+  poison: 'Veneno',
+  ground: 'Tierra',
+  rock: 'Roca',
+  bug: 'Bicho',
+  ghost: 'Fantasma',
+  steel: 'Acero',
+  fire: 'Fuego',
+  water: 'Agua',
+  grass: 'Planta',
+  electric: 'Eléctrico',
+  psychic: 'Psíquico',
+  ice: 'Hielo',
+  dragon: 'Dragón',
+  dark: 'Siniestro',
+  fairy: 'Hada',
+};
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function typeSpan(type) {
+  const color = typeColors[type] || '#777';
+  return `<span style="background-color:${color}">${typeTranslation[type]}</span>`;
+}
+
+function createGenerationFilters() {
+  generationFiltersDiv.innerHTML = '<strong>Generación:</strong> ';
+  const genColors = {
+    1: '#FF0000',
+    2: '#FF7F00',
+    3: '#FFFF00',
+    4: '#00FF00',
+    5: '#00FFFF',
+    6: '#0000FF',
+    7: '#8B00FF',
+    8: '#FF1493',
+    9: '#A52A2A',
+  };
+
+  Object.entries(generations).forEach(([gen]) => {
+    const btn = document.createElement('button');
+    btn.textContent = `Gen ${gen}`;
+    btn.dataset.gen = gen;
+    btn.style.backgroundColor = genColors[gen] || '#666';
+    btn.style.color = '#fff';
+    btn.style.fontWeight = 'bold';
+    btn.style.borderRadius = '6px';
+    btn.style.marginRight = '8px';
+    btn.style.marginBottom = '6px';
+    btn.style.border = 'none';
+    btn.style.padding = '6px 12px';
+    btn.style.cursor = 'pointer';
+
+    btn.addEventListener('click', () => {
+      if (selectedGenerations.has(gen)) {
+        selectedGenerations.delete(gen);
+        btn.style.opacity = '1';
+      } else {
+        selectedGenerations.add(gen);
+        btn.style.opacity = '0.6';
+      }
+      currentPage = 1;
+      applyFilters();
+    });
+    generationFiltersDiv.appendChild(btn);
+  });
+}
+
+function createTypeFilters() {
+  typeFiltersDiv.innerHTML = '<strong>Tipo:</strong> ';
+  Object.entries(typeColors).forEach(([type, color]) => {
+    const btn = document.createElement('button');
+    btn.textContent = typeTranslation[type];
+    btn.dataset.type = type;
+    btn.style.backgroundColor = color;
+    btn.style.color = '#fff';
+    btn.style.fontWeight = 'bold';
+    btn.style.borderRadius = '6px';
+    btn.style.marginRight = '8px';
+    btn.style.marginBottom = '6px';
+    btn.style.border = 'none';
+    btn.style.padding = '6px 12px';
+    btn.style.cursor = 'pointer';
+
+    btn.addEventListener('click', () => {
+      if (selectedTypes.has(type)) {
+        selectedTypes.delete(type);
+        btn.style.opacity = '1';
+      } else {
+        selectedTypes.add(type);
+        btn.style.opacity = '0.6';
+      }
+      currentPage = 1;
+      applyFilters();
+    });
+    typeFiltersDiv.appendChild(btn);
+  });
+}
+
+async function fetchPokemon(id) {
+  try {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    if (!res.ok) throw new Error('Pokémon no encontrado');
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+
+async function fetchSpecies(id) {
+  try {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+    if (!res.ok) throw new Error('Especie no encontrada');
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+
+async function loadAllPokemons() {
+  allPokemons = [];
+  const maxId = generations[9].end;
+  // Para no saturar la API, carga en lotes
+  const batchSize = 50;
+  for (let i = 1; i <= maxId; i += batchSize) {
+    const batchPromises = [];
+    for (let j = i; j < i + batchSize && j <= maxId; j++) {
+      batchPromises.push(fetchPokemon(j));
+    }
+    const batchResults = await Promise.all(batchPromises);
+    allPokemons.push(...batchResults.filter(p => p));
+  }
+  filteredPokemons = [...allPokemons];
+}
+
+function filterByGeneration(pokemon) {
+  if (selectedGenerations.size === 0) return true;
+  for (const gen of selectedGenerations) {
+    const { start, end } = generations[gen];
+    if (pokemon.id >= start && pokemon.id <= end) return true;
+  }
+  return false;
+}
+
+function filterByType(pokemon) {
+  if (selectedTypes.size === 0) return true;
+  return pokemon.types.some(t => selectedTypes.has(t.type.name));
+}
+
+function filterBySearch(pokemon) {
+  const search = searchInput.value.trim().toLowerCase();
+  if (!search) return true;
+  return (
+    pokemon.name.toLowerCase().includes(search) ||
+    pokemon.id.toString() === search
+  );
+}
+
+function applyFilters() {
+  filteredPokemons = allPokemons.filter(p => filterByGeneration(p) && filterByType(p) && filterBySearch(p));
+  updatePaginationButtons();
+  renderCurrentPage();
+}
+
+function renderCurrentPage() {
+  pokemonContainer.innerHTML = '';
+  if (filteredPokemons.length === 0) {
+    pokemonContainer.innerHTML = '<p>No se encontraron Pokémon.</p>';
+    pageIndicator.textContent = 'Página 0';
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
+    return;
+  }
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const pagePokemons = filteredPokemons.slice(start, end);
+
+  pagePokemons.forEach(p => {
+    const typesHTML = p.types.map(t => typeSpan(t.type.name)).join('');
+    const spriteUrl = p.sprites.other['official-artwork'].front_default || p.sprites.front_default;
+    const card = document.createElement('div');
+    card.className = 'pokemon-card';
+    card.innerHTML = `
+      <img src="${spriteUrl}" alt="${p.name}" loading="lazy"/>
+      <h3>${capitalize(p.name)} (#${p.id})</h3>
+      <div class="types">${typesHTML}</div>
+    `;
+    card.addEventListener('click', () => openModal(p));
+    pokemonContainer.appendChild(card);
+  });
+
+  pageIndicator.textContent = `Página ${currentPage} de ${Math.ceil(filteredPokemons.length / itemsPerPage)}`;
+}
+
+function updatePaginationButtons() {
+  prevBtn.disabled = currentPage === 1;
+  nextBtn.disabled = currentPage >= Math.ceil(filteredPokemons.length / itemsPerPage);
+}
+
+prevBtn.addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderCurrentPage();
+    updatePaginationButtons();
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  if (currentPage < Math.ceil(filteredPokemons.length / itemsPerPage)) {
+    currentPage++;
+    renderCurrentPage();
+    updatePaginationButtons();
+  }
+});
+
+searchBtn.addEventListener('click', () => {
+  currentPage = 1;
+  applyFilters();
+});
+
+searchInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    currentPage = 1;
+    applyFilters();
+  }
+});
+
+resetFiltersBtn.addEventListener('click', () => {
+  selectedTypes.clear();
+  selectedGenerations.clear();
+  searchInput.value = '';
+  // Reset opacity of buttons:
+  Array.from(typeFiltersDiv.querySelectorAll('button')).forEach(btn => btn.style.opacity = '1');
+  Array.from(generationFiltersDiv.querySelectorAll('button')).forEach(btn => btn.style.opacity = '1');
+  currentPage = 1;
+  applyFilters();
+});
+
+function openModal(pokemon) {
+  modalName.textContent = capitalize(pokemon.name) + ` (#${pokemon.id})`;
+  modalTypes.innerHTML = pokemon.types.map(t => typeSpan(t.type.name)).join('');
+  modalImage.src = pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default;
+  modalImage.alt = capitalize(pokemon.name);
+  modalImageShiny.src = pokemon.sprites.other['official-artwork'].front_shiny || pokemon.sprites.front_shiny || '';
+  modalImageShiny.alt = capitalize(pokemon.name) + ' shiny';
+  modalDescription.textContent = 'Cargando descripción...';
+  modalMoreLink.href = `https://www.pokemon.com/es/pokedex/${pokemon.name}`;
+  modalMoreLink.textContent = 'Ver más detalles en Pokémon.com';
+
+  modalOverlay.style.display = 'flex';
+
+  fetchSpecies(pokemon.id).then(species => {
+    if (!species) {
+      modalDescription.textContent = 'Descripción no disponible.';
+      return;
+    }
+    // Buscar la descripción en español
+    const entry = species.flavor_text_entries.find(
+      e => e.language.name === 'es' && e.version.name === 'ruby'
+    ) || species.flavor_text_entries.find(e => e.language.name === 'es');
+    modalDescription.textContent = entry ? entry.flavor_text.replace(/\n|\f/g, ' ') : 'Descripción no disponible.';
+  });
+}
+
+modalCloseBtn.addEventListener('click', () => {
+  modalOverlay.style.display = 'none';
+});
+
+modalOverlay.addEventListener('click', (e) => {
+  if (e.target === modalOverlay) {
+    modalOverlay.style.display = 'none';
+  }
+});
+
+createGenerationFilters();
+createTypeFilters();
+loadAllPokemons().then(() => {
+  applyFilters();
+});
+</script>
+
+</body>
+</html>

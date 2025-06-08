@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PokeChampions.DB - Inicio</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      background: linear-gradient(to bottom, #1b2735, #090a0f);
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px 0;
+    }
+    .logo {
+      width: 40px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    .portfolio-categorias {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 30px 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .categoria {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(59, 76, 202, 0.7);
+      width: 220px;
+      padding: 20px;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .categoria:hover {
+      background: rgba(59, 76, 202, 0.7);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+      color: #fff;
+    }
+    .categoria h2 {
+      margin: 0 0 10px;
+      font-size: 1.5rem;
+    }
+    .categoria p {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin: 0;
+      line-height: 1.3;
+    }
+    .emoji {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    /* MODAL ESTILO */
+    #pokemon-modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    #pokemon-modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #1c1c2b;
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      position: relative;
+      color: #fff;
+      text-align: left;
+    }
+
+    .modal-content img {
+      max-width: 100px;
+      margin: 10px;
+      vertical-align: middle;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: #ff4f4f;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      background: #ff2f2f;
+    }
+
+    /* Botones variantes */
+    .variant-btn {
+      background-color: #3b4cca;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      margin: 5px 5px 0 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    .variant-btn:hover {
+      background-color: #2a379c;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><img src="assets/logo.png" alt="PokeChampions.DB" class="logo" /> PokeChampions.DB</h1>
+  </header>
+
+  <section class="portfolio-categorias">
+    <a href="release.html" class="categoria" title="Fecha de Lanzamiento">
+      <div class="emoji">📅</div>
+      <h2>Fecha de Lanzamiento</h2>
+      <p>Conoce cuándo salió el juego y sus actualizaciones.</p>
+    </a>
+    <a href="news.html" class="categoria" title="Noticias e Información">
+      <div class="emoji">📰</div>
+      <h2>Noticias e Información</h2>
+      <p>Últimas noticias y detalles sobre Pokémon Champions.</p>
+    </a>
+    <a href="pokedex.html" class="categoria" title="Pokédex">
+      <div class="emoji">🧬</div>
+      <h2>Pokédex</h2>
+      <p>Explora la lista completa de Pokémon por generación.</p>
+    </a>
+    <a href="about.html" class="categoria" title="Sobre Pokémon Champions">
+      <div class="emoji">❓</div>
+      <h2>Sobre Pokémon Champions</h2>
+      <p>Información general y características del juego.</p>
+    </a>
+        <a href="wikis.html" class="categoria" title="Pokemon Confirmados">
+      <div class="emoji">📚</div>
+      <h2>Pokémon Confirmados</h2>
+      <p>Pokémon mostrados hasta la fecha.</p>
+    </a>
+        <a href="sugerencias.html" class="categoria" title="Sugerencias para la página">
+      <div class="emoji">📭</div>
+      <h2>Sugerencias</h2>
+      <p>¿Qué te gustaría mejorar o ver en la página?</p>
+    </a>

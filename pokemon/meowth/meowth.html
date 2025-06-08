@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meowth - PokeChampions.DB</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #eee;
+      margin: 0;
+      padding: 20px;
+    }
+    .card {
+      background: linear-gradient(135deg, #f5deb3, #d2b48c);
+      border-radius: 12px;
+      width: 200px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px #c9a35a;
+      margin: auto;
+    }
+    .card img {
+      width: 120px;
+      height: 120px;
+    }
+    .card h3 {
+      margin: 10px 0 5px;
+      color: #5a3e1b;
+    }
+    .card .type {
+      background-color: #f5deb3;
+      color: #5a3e1b;
+      border-radius: 10px;
+      display: inline-block;
+      padding: 4px 10px;
+      font-weight: bold;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none; 
+      position: fixed; 
+      z-index: 1000; 
+      padding-top: 60px; 
+      left: 0;
+      top: 0;
+      width: 100%; 
+      height: 100%; 
+      overflow: auto;
+      background-color: rgba(0,0,0,0.85);
+    }
+    .modal-content {
+      background-color: #222;
+      margin: auto;
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      color: #eee;
+      position: relative;
+      text-align: center;
+    }
+    .close-btn {
+      color: #aaa;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close-btn:hover {
+      color: #fff;
+    }
+    .modal img {
+      width: 120px;
+      margin: 10px;
+    }
+    .modal .types {
+      margin: 10px 0;
+    }
+    .modal .types span {
+      background-color: #f5deb3;
+      color: #5a3e1b;
+      border-radius: 10px;
+      padding: 5px 15px;
+      margin: 0 5px;
+      font-weight: bold;
+    }
+    .modal p {
+      font-size: 1.05em;
+      margin: 10px 0;
+    }
+    .modal a {
+      color: #ffd700;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 15px;
+      border: 1px solid #ffd700;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+    .modal a:hover {
+      background-color: #ffd700;
+      color: #121212;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card" id="meowthCard">
+  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/52.png" alt="Meowth" />
+  <h3>Meowth</h3>
+  <div class="type">Normal</div>
+</div>
+
+<!-- Modal -->
+<div id="meowthModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <h2>Meowth</h2>
+    <div class="types">
+      <span>Normal</span>
+    </div>
+    <p><em>Descripción:</em> Meowth es un Pokémon ágil y curioso conocido por su habilidad de recolectar monedas. Su personalidad traviesa lo hace muy popular.</p>
+    <p><strong>Curiosidad:</strong> En el anime, el Meowth del Team Rocket es uno de los pocos Pokémon que puede hablar.</p>
+    <div>
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/52.png" alt="Meowth Normal" />
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/52.png" alt="Meowth Shiny" />
+    </div>
+    <a href="meowth.html">Ver página completa de Meowth</a>
+  </div>
+</div>
+
+<script>
+  const card = document.getElementById('meowthCard');
+  const modal = document.getElementById('meowthModal');
+  const closeBtn = document.getElementById('closeModal');
+
+  card.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
